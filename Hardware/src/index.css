@@ -1,49 +1,71 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hardware Portfolio Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-  }
+    /* Dark tech theme - always dark */
+    --background: 220 20% 4%;
+    --foreground: 120 100% 50%;
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --card: 220 15% 8%;
+    --card-foreground: 120 60% 70%;
+
+    --popover: 220 15% 8%;
+    --popover-foreground: 120 60% 70%;
+
+    /* LED Green as primary */
+    --primary: 120 100% 50%;
+    --primary-foreground: 220 20% 4%;
+
+    /* Amber LED for secondary */
+    --secondary: 38 100% 50%;
+    --secondary-foreground: 220 20% 4%;
+
+    /* Muted greens */
+    --muted: 220 15% 12%;
+    --muted-foreground: 120 20% 40%;
+
+    /* Cyan accent */
+    --accent: 180 100% 45%;
+    --accent-foreground: 220 20% 4%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 120 50% 20%;
+    --input: 220 15% 15%;
+    --ring: 120 100% 50%;
+
+    --radius: 0.25rem;
+
+    /* Custom hardware colors */
+    --led-green: 120 100% 50%;
+    --led-green-dim: 120 100% 15%;
+    --led-amber: 38 100% 50%;
+    --led-amber-dim: 38 100% 15%;
+    --led-red: 0 100% 50%;
+    --led-cyan: 180 100% 50%;
+    --pcb-green: 140 40% 15%;
+    --trace-copper: 30 80% 40%;
+
+    /* Glows */
+    --glow-green: 0 0 20px hsl(120 100% 50% / 0.8), 0 0 40px hsl(120 100% 50% / 0.4), 0 0 60px hsl(120 100% 50% / 0.2);
+    --glow-amber: 0 0 20px hsl(38 100% 50% / 0.8), 0 0 40px hsl(38 100% 50% / 0.4);
+    --glow-cyan: 0 0 20px hsl(180 100% 50% / 0.8), 0 0 40px hsl(180 100% 50% / 0.4);
+
+    --sidebar-background: 220 15% 6%;
+    --sidebar-foreground: 120 60% 70%;
+    --sidebar-primary: 120 100% 50%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 120 60% 70%;
+    --sidebar-border: 120 50% 20%;
+    --sidebar-ring: 120 100% 50%;
   }
 }
 
@@ -51,7 +73,83 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .led-glow {
+    text-shadow: var(--glow-green);
+  }
+
+  .led-glow-amber {
+    text-shadow: var(--glow-amber);
+  }
+
+  .led-glow-cyan {
+    text-shadow: var(--glow-cyan);
+  }
+
+  .segment-glow {
+    filter: drop-shadow(0 0 8px hsl(var(--led-green))) drop-shadow(0 0 16px hsl(var(--led-green) / 0.5));
+  }
+
+  .pcb-pattern {
+    background-image: 
+      linear-gradient(90deg, hsl(var(--trace-copper) / 0.1) 1px, transparent 1px),
+      linear-gradient(hsl(var(--trace-copper) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .circuit-line {
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(var(--trace-copper)) 10%, 
+      hsl(var(--trace-copper)) 90%, 
+      transparent
+    );
+    height: 2px;
+  }
+}
+
+@layer utilities {
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-flicker {
+    animation: flicker 0.15s ease-in-out infinite;
+  }
+
+  .animate-scan {
+    animation: scan 3s linear infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px hsl(var(--led-green))) drop-shadow(0 0 16px hsl(var(--led-green) / 0.5));
+    }
+    50% {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 4px hsl(var(--led-green))) drop-shadow(0 0 8px hsl(var(--led-green) / 0.3));
+    }
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+  }
+
+  @keyframes scan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
   }
 }

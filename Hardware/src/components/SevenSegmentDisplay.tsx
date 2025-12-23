@@ -188,7 +188,7 @@ const DisplayScene = () => {
       setVisibleChars(new Array(maxLen).fill(false));
 
       switch (mode) {
-        case 'typeIn':
+        case 'typeIn': {
           // Type in one character at a time
           for (let i = 0; i < maxLen; i++) {
             await new Promise(r => setTimeout(r, 200));
@@ -201,8 +201,9 @@ const DisplayScene = () => {
           }
           await new Promise(r => setTimeout(r, 1500));
           break;
+        }
 
-        case 'flash':
+        case 'flash': {
           // Flash on/off effect
           setDisplayText(paddedText);
           for (let i = 0; i < 6; i++) {
@@ -212,8 +213,9 @@ const DisplayScene = () => {
           setVisibleChars(new Array(maxLen).fill(true));
           await new Promise(r => setTimeout(r, 1200));
           break;
+        }
 
-        case 'scroll':
+        case 'scroll': {
           // Scroll text from right to left
           const scrollText = '      ' + paddedText + '      ';
           for (let offset = 0; offset <= paddedText.length + 6; offset++) {
@@ -223,8 +225,9 @@ const DisplayScene = () => {
             await new Promise(r => setTimeout(r, 180));
           }
           break;
+        }
 
-        case 'countdown':
+        case 'countdown': {
           // Count down effect
           setVisibleChars(new Array(maxLen).fill(true));
           for (let i = 0; i < paddedText.length; i++) {
@@ -234,8 +237,9 @@ const DisplayScene = () => {
           }
           await new Promise(r => setTimeout(r, 500));
           break;
+        }
 
-        case 'wave':
+        case 'wave': {
           // Wave animation - segments light up in sequence
           setDisplayText(paddedText);
           for (let wave = 0; wave < 3; wave++) {
@@ -244,7 +248,7 @@ const DisplayScene = () => {
                 const next = new Array(maxLen).fill(false);
                 next[i] = true;
                 if (i > 0) next[i - 1] = true;
-                if (i > 1) next[i - 2] = true;
+                if (i < maxLen - 1) next[i + 1] = true;
                 return next;
               });
               await new Promise(r => setTimeout(r, 100));
@@ -253,6 +257,7 @@ const DisplayScene = () => {
           setVisibleChars(new Array(maxLen).fill(true));
           await new Promise(r => setTimeout(r, 800));
           break;
+        }
       }
 
       // Clear and move to next
