@@ -1,6 +1,6 @@
-import { useRef, useMemo, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 // 7-segment display mapping for each character
@@ -47,6 +47,8 @@ interface SegmentProps {
   horizontal?: boolean;
 }
 
+const intensity = 1.5;
+
 const Segment = ({ position, rotation = [0, 0, 0], isOn, color = '#00ff00', horizontal = true }: SegmentProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.MeshStandardMaterial>(null);
@@ -88,7 +90,7 @@ interface SevenSegmentCharProps {
 
 const SevenSegmentChar = ({ char, position, isVisible, color = '#00ff00' }: SevenSegmentCharProps) => {
   const [activeSegments, setActiveSegments] = useState<boolean[]>(new Array(7).fill(false));
-  const timeoutRefs = useRef<NodeJS.Timeout[]>([]);
+  const timeoutRefs = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     // Clear any existing timeouts
@@ -324,6 +326,13 @@ const Particles = ({ color = '#00ff00' }: { color?: string }) => {
     return pos;
   });
 
+  useEffect(() => {
+    if (particlesRef.current) {
+      const geometry = particlesRef.current.geometry as THREE.BufferGeometry;
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    }
+  }, [positions]);
+
   useFrame((state) => {
     if (particlesRef.current) {
       particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
@@ -332,14 +341,7 @@ const Particles = ({ color = '#00ff00' }: { color?: string }) => {
 
   return (
     <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
-        />
-      </bufferGeometry>
+      <bufferGeometry />
       <pointsMaterial size={0.02} color={color} transparent opacity={0.6} />
     </points>
   );
