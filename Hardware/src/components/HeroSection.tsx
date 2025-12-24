@@ -54,12 +54,12 @@ const HeroSection = () => {
             transition={{ delay: 2.5 }}
           >
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
-              <span className="text-primary led-glow">Hardware</span>{' '}
+              <span className="text-primary led-glow">Computer</span>{' '}
               <span className="text-card-foreground">Engineer</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground font-mono max-w-2xl mx-auto">
               <span className="text-primary">&lt;</span>
-              Crafting digital circuits and embedded systems
+              An FPGA's biggest fan
               <span className="text-primary">/&gt;</span>
             </p>
           </motion.div>
@@ -72,8 +72,8 @@ const HeroSection = () => {
             transition={{ delay: 3 }}
           >
             {[
-              { icon: CircuitBoard, label: 'PCB Design' },
-              { icon: Cpu, label: 'Embedded Systems' },
+              { icon: CircuitBoard, label: 'FPGA Design' },
+              { icon: Cpu, label: 'Electrical Circuits' },
               { icon: Zap, label: 'Power Electronics' },
             ].map((item, index) => (
               <motion.div

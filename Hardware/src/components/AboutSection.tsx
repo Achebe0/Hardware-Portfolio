@@ -8,10 +8,9 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
-    { value: '5+', label: 'Years Experience' },
-    { value: '50+', label: 'Projects Completed' },
-    { value: '20+', label: 'PCB Designs' },
-    { value: '100%', label: 'Client Satisfaction' },
+    { value: '5+', label: 'Design Classes Completed' },
+    { value: '3+', label: 'Projects Completed' },
+    
   ];
 
   return (
@@ -48,18 +47,10 @@ const AboutSection = () => {
                 
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    <span className="text-primary">$</span> Hello! I'm a passionate hardware engineer 
-                    specializing in embedded systems, PCB design, and digital circuit development.
+                    <span className="text-primary">$</span> Hello! I'm a passionate computer engineer 
+                    who enjoys designing and building electrical systems zooming in on FPGA's and embedded systems.
                   </p>
-                  <p>
-                    <span className="text-primary">$</span> My journey began with tinkering with 
-                    microcontrollers and has evolved into designing complex multi-layer PCBs and 
-                    writing efficient firmware for various applications.
-                  </p>
-                  <p>
-                    <span className="text-primary">$</span> I enjoy bridging the gap between hardware 
-                    and software, creating robust solutions that push the boundaries of what's possible.
-                  </p>
+                 
                   <p className="text-primary animate-blink">_</p>
                 </div>
               </div>
@@ -72,11 +63,9 @@ const AboutSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="grid grid-cols-2 gap-4"
             >
-              {[
-                { icon: Cpu, title: 'Microcontrollers', desc: 'ARM, AVR, PIC' },
-                { icon: Code, title: 'Languages', desc: 'C, C++, Python, Verilog' },
-                { icon: Wrench, title: 'Tools', desc: 'KiCad, Altium, Eagle' },
-                { icon: Terminal, title: 'Protocols', desc: 'SPI, I2C, UART, CAN' },
+              {[ 
+                { icon: Code, title: 'Languages', desc: 'C, C++, Python, VHDL, Systems Verilog, Verilog' },
+                { icon: Wrench, title: 'Tools', desc: 'KiCad, Altium, Eagle, AMD Vivado, Xilinx' }
               ].map((item, index) => (
                 <motion.div
                   key={item.title}
